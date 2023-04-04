@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7262beac6f31ffd43b3d55223521dfba, type: 3}
+  m_Name: Housing
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: -396792960, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
+  - {fileID: -799346590, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
+  - {fileID: 1683763714, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
+  - {fileID: -506748132, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
+  - {fileID: -531266802, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
+  - {fileID: -699945518, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
+  rotationStructure:
+  - spriteIndex: 0
+    rot: 0
+    sprite: {fileID: 0}
+  - spriteIndex: 1
+    rot: 1.5
+    sprite: {fileID: 0}
+  - spriteIndex: 1
+    rot: 1
+    sprite: {fileID: 0}
+  - spriteIndex: 2
+    rot: 1
+    sprite: {fileID: 0}
+  - spriteIndex: 1
+    rot: 0.5
+    sprite: {fileID: 0}
+  - spriteIndex: 4
+    rot: 0.5
+    sprite: {fileID: 0}
+  - spriteIndex: 2
+    rot: 0.5
+    sprite: {fileID: 0}
+  - spriteIndex: 3
+    rot: 0.5
+    sprite: {fileID: 0}
+  - spriteIndex: 1
+    rot: 0
+    sprite: {fileID: 0}
+  - spriteIndex: 2
+    rot: 1.5
+    sprite: {fileID: 0}
+  - spriteIndex: 4
+    rot: 0
+    sprite: {fileID: 0}
+  - spriteIndex: 3
+    rot: 1
+    sprite: {fileID: 0}
+  - spriteIndex: 2
+    rot: 0
+    sprite: {fileID: 0}
+  - spriteIndex: 3
+    rot: 1.5
+    sprite: {fileID: 0}
+  - spriteIndex: 3
+    rot: 0
+    sprite: {fileID: 0}
+  - spriteIndex: 5
+    rot: 0
+    sprite: {fileID: 0}

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DefaultTheme
   m_EditorClassIdentifier: 
   EmptyTile: {fileID: 977423223190207535, guid: 511709a0a50ae7348a62c2d6478dc54a, type: 3}
-  BuildingTile: {fileID: 11400000, guid: ba01c6c5a62efda45b8626b00aa85f0b, type: 2}
+  BuildingTile: {fileID: 11400000, guid: f6210a7e4b808964ea3f73015203c930, type: 2}
   RoadTile: {fileID: 11400000, guid: 64ceef8fcfebeac4ebdbf14166c7b11f, type: 2}
+  HousingTile: {fileID: 11400000, guid: ba01c6c5a62efda45b8626b00aa85f0b, type: 2}

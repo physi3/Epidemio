@@ -4,28 +4,42 @@ using UnityEngine;
 
 public class TownRenderer
 {
+    TownSystem town;
     List<List<TileSprite>> townSprites;
-    public TownRenderer() {}
 
-    public void Render(TownSystem town) {
+    public TownRenderer(TownSystem _town) {
+        town = _town;
+    }
+
+    public void Render() {
         foreach (TileGroup tileGroup in town.tileGroups)
         {
             foreach (Vector2Int pos in tileGroup.tiles)
             {
-                SeamlessTile seamlessTile = tileGroup.type == TileGroup.GroupType.Road ? town.theme.RoadTile : town.theme.BuildingTile ;
-                townSprites[pos.y][pos.x].Set(seamlessTile.GetSpriteInfo(tileGroup.NeighboorIndex(pos)));
+                DynamicTile seamlessTile = town.theme.FindTile(tileGroup.type);
+                townSprites[pos.y][pos.x].Set(seamlessTile.GetSpriteInfo(tileGroup.NeighbourIndex(pos)));
             }
         }
     }
 
-    public void GenerateTown(Vector2Int size)
+    public void GenerateSprites()
     {
-        townSprites = new(size.y);
-        for (int y = 0; y < size.y; y++) {
-            townSprites.Add(new(size.x));
-            for (int x = 0; x < size.x; x++) {
-                townSprites[y].Add(Object.Instantiate(TownSystem.instance.theme.EmptyTile, new Vector3(x, y), Quaternion.identity));
+        townSprites = new(town.mapSize.y);
+        for (int y = 0; y < town.mapSize.y; y++) {
+            townSprites.Add(new(town.mapSize.x));
+            for (int x = 0; x < town.mapSize.x; x++) {
+                townSprites[y].Add(Object.Instantiate(town.theme.EmptyTile, new Vector3(x, y), Quaternion.identity, town.transform));
             }
         }
+    }
+
+    public TileSprite GetTileSprite(Vector2Int position)
+    {
+        return townSprites[position.y][position.x];
+    }
+
+    public Vector2Int PositionToTile(Vector3 position)
+    {
+        return new(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y));
     }
 }

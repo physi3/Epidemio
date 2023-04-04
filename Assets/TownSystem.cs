@@ -6,55 +6,95 @@ public class TownSystem : MonoBehaviour
 {
     public static TownSystem instance;
     public List<TileGroup> tileGroups = new();
-    [SerializeField] Vector2Int mapSize = new Vector2Int(16, 8);
-    TownRenderer townRenderer;
-    [SerializeField] public TownTheme theme;
+    [HideInInspector] public Vector2Int mapSize;
+    public TownRenderer townRenderer;
+    TileGroup selectedGroup;
 
-    void Awake()
+    [SerializeField] public TownTheme theme;
+    [SerializeField] public TextAsset townFile;
+
+    private void Awake()
     {
         instance = this;
+        mapSize = new Vector2Int(32, 24);
+
+        LoadFromFile(townFile);
+
+        townRenderer = new(this);
     }
 
     private void Start()
     {
-        townRenderer = new();
-        townRenderer.GenerateTown(mapSize);
 
-        tileGroups.Add(new RoadSystem(new() {
-            new(0, 6),
-            new(1, 6),
-            new(2, 6),
-            new(3, 6),
-            new(4, 6),
-            new(5, 6),
-            new(5, 5),
-            new(5, 4),
-            new(5, 3),
-            new(5, 2),
-            new(5, 1),
-            new(5, 0),
-            new(6, 2),
-            new(7, 2),
-            new(8, 2),
-            new(9, 2),
-            new(10, 2),
-            new(11, 2),
-            new(12, 2),
-            new(12, 1),
-            new(12, 0),
-            new(12, 3),
-            new(12, 4),
-            new(13, 4),
-            new(14, 4),
-            new(15, 4)
-        }));
-        tileGroups.Add(new(new() {
-            new(8, 3),
-            new(8, 4),
-            new(9, 3),
-            new(9, 4)
-        }, TileGroup.GroupType.Building));
+        townRenderer.GenerateSprites();
+        TownAgentManager.instance.GenerateAgents(this);
+        townRenderer.Render();
 
-        townRenderer.Render(this);
+        /*
+        List<Vector2Int> path = RoadSystem.instance.FindShortestPath(new(1, 6), new(15, 3));
+        foreach (Vector2Int tile in path)
+            townRenderer.GetTileSprite(tile).Highlight();
+        */
+    }
+
+    private void LoadFromFile(TextAsset file)
+    {
+        List<Vector2Int> tiles = new();
+        TileGroup.GroupType type = 0;
+
+        bool newGroup = true;
+        
+        foreach (string line in file.text.Split("\n"))
+        {
+            if (string.IsNullOrEmpty(line))
+                break; // Finish if we've reached the end of the file
+
+            if (line[0] == 13) { // If reached the end of the group in the file
+                tileGroups.Add(TileGroup.Construct(tiles, type)); // Add a new group to the system
+                newGroup = true;
+                continue;
+            }
+
+            if (newGroup) { // If start of a new group
+                type = (TileGroup.GroupType)int.Parse(line); // Determine the group type
+                tiles = new(); // Reset the current tiles list
+                newGroup = false;
+                continue;
+            }
+
+            // Determine the x and y given from the file and create a new tile
+            int x = int.Parse(line.Split(", ")[0]);
+            int y = int.Parse(line.Split(", ")[1]);
+
+            tiles.Add(new Vector2Int(x, y));
+        }
+    }
+
+    public TileGroup PositionToGroup(Vector3 position)
+    {
+        Vector2Int vector2Pos = townRenderer.PositionToTile(position);
+        foreach (TileGroup group in tileGroups)
+            if (group.tiles.Contains(vector2Pos))
+                return group;
+        return null;
+    }
+
+    public void SelectGroup(TileGroup tileGroup)
+    {
+        if (selectedGroup != null)
+            selectedGroup.Highlight(false);
+
+        if (Time.frameCount == Inspector.instance.frameOfLastInspection) {
+        } else if (selectedGroup == tileGroup) {
+            Inspector.instance.SetVisibility(false);
+        } else if (tileGroup is not null and IInspectable) {
+            tileGroup.Highlight(true);
+            Inspector.instance.SetVisibility(true);
+            Inspector.instance.Inspect((IInspectable)tileGroup);
+        } else { 
+            Inspector.instance.SetVisibility(false);
+        }
+        selectedGroup = tileGroup;
+
     }
 }

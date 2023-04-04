@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Building
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: -396792960, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
-  - {fileID: -799346590, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
-  - {fileID: 1683763714, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
-  - {fileID: -506748132, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
-  - {fileID: -531266802, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
-  - {fileID: -699945518, guid: 62a88593bdc4e32408c60bdd3910d133, type: 3}
+  - {fileID: -801565416, guid: 2d1e126f6eabbfb41bde9f87ac670755, type: 3}
+  - {fileID: -1526965965, guid: 2d1e126f6eabbfb41bde9f87ac670755, type: 3}
+  - {fileID: -773444918, guid: 2d1e126f6eabbfb41bde9f87ac670755, type: 3}
+  - {fileID: 1318751186, guid: 2d1e126f6eabbfb41bde9f87ac670755, type: 3}
+  - {fileID: -1561012009, guid: 2d1e126f6eabbfb41bde9f87ac670755, type: 3}
+  - {fileID: 2046617084, guid: 2d1e126f6eabbfb41bde9f87ac670755, type: 3}
   rotationStructure:
   - spriteIndex: 0
     rot: 0
